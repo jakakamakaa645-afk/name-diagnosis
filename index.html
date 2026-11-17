@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>名前性格診断</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #74b9ff, #a29bfe);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 350px;
+}
+h1 { color: #2d3436; }
+input {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px 0;
+}
+button {
+    background: #6c5ce7;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover { background: #5649c0; }
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #0984e3;
+}
+</style>
+</head>
+<body>
+<main class="container">
+    <h1>名前性格診断</h1>
+    <p>名前を入力してください</p>
+    <input type="text" id="name" placeholder="例：山田太郎" aria-label="名前">
+    <br>
+    <button type="button" onclick="diagnosis()">診断する</button>
+    <div id="result" aria-live="polite"></div>
+</main>
+<script>
+function diagnosis() {
+    const name = document.getElementById("name").value.trim();
+    const resultElement = document.getElementById("result");
+
+    if (name === "") {
+        resultElement.textContent = "名前を入力してください。";
+        return;
+    }
+
+    const types = [
+        "あなたは『リーダータイプ』です！周囲を引っ張る力があります。",
+        "あなたは『努力家タイプ』です！コツコツ続ける力があります。",
+        "あなたは『発想力タイプ』です！新しいアイデアが得意です。",
+        "あなたは『協調性タイプ』です！人とのつながりを大切にします。",
+        "あなたは『挑戦者タイプ』です！新しいことに挑戦するのが好きです。",
+        "あなたは『分析家タイプ』です！物事を冷静に考える力があります。"
+    ];
+
+    let score = 0;
+    for (let i = 0; i < name.length; i++) {
+        score += name.charCodeAt(i);
+    }
+
+    resultElement.textContent = types[score % types.length];
+}
+</script>
+</body>
+</html>
+
